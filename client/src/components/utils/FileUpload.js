@@ -17,7 +17,7 @@ function FileUpload() {
         axios.post('/api/product/image', formData, config)
         .then(response => {
             if(response.data.success){
-
+                console.log(response.data);
             }else{
                 alert('파일을 저장하는데 실패');
             }
