@@ -4,6 +4,8 @@ import axios from "axios";
 import {Icon, Col, Card, Row, Carousel} from "antd";
 import Meta from "antd/lib/card/Meta";
 import ImageSlider from '../../utils/ImageSlider';
+import CheckBox from './Sections/CheckBox';
+import { contients } from './Sections/Datas';
 
 
 function LandingPage() {
@@ -80,6 +82,10 @@ function LandingPage() {
                </div>
 
                { /* Filter */ }
+
+               { /* Checkbox */ }
+                <CheckBox  list = {contients} />
+               { /* RadioBox */ }
 
                { /* Search */ }
 
