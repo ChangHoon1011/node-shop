@@ -15,6 +15,7 @@ function LandingPage() {
     const [Limit, setLimit] = useState(8)
     const [PostSize, setPostSize] = useState(0)
 
+
     useEffect(()=>{
 
         let body = {
@@ -55,6 +56,11 @@ function LandingPage() {
         setSkip(skip)
 
     }
+
+    const handleFilters = ()=>{
+
+    }
+    
     const renderCards = Products.map((product, index)=>{
 
         console.log('product', product);
@@ -84,7 +90,7 @@ function LandingPage() {
                { /* Filter */ }
 
                { /* Checkbox */ }
-                <CheckBox  list = {contients} />
+                <CheckBox  list = {contients} handleFilters={fileter=> handleFilters(filters, "continents")}/>
                { /* RadioBox */ }
 
                { /* Search */ }
