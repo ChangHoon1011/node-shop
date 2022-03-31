@@ -5,7 +5,7 @@ import {Icon, Col, Card, Row, Carousel} from "antd";
 import Meta from "antd/lib/card/Meta";
 import ImageSlider from '../../utils/ImageSlider';
 import CheckBox from './Sections/CheckBox';
-import { contients } from './Sections/Datas';
+import { continents } from './Sections/Datas';
 
 
 function LandingPage() {
@@ -14,7 +14,10 @@ function LandingPage() {
     const [Skip, setSkip] = useState(0)
     const [Limit, setLimit] = useState(8)
     const [PostSize, setPostSize] = useState(0)
-
+    const [Filters, setFilters] = useState({
+        continents: [],
+        price: []
+    })
 
     useEffect(()=>{
 
@@ -57,15 +60,31 @@ function LandingPage() {
 
     }
 
-    const handleFilters = ()=>{
+    const showFilteredResults = (filters) => {
+
+        let body = {
+            skip: 0,
+            limit: Limit,
+            filters: filters
+        }  
+
+        getProducts(body)
+        setSkip(0)
 
     }
-    
+    const handleFilters = (filters, category)=>{
+        const newFilters = {...Filters}
+        
+        newFilters[category] = filters
+
+        showFilteredResults(newFilters)
+    }
+
     const renderCards = Products.map((product, index)=>{
 
-        console.log('product', product);
-        console.log('postSize', PostSize);
-        console.log('limit', Limit);
+        //console.log('product', product);
+        //console.log('postSize', PostSize);
+        //console.log('limit', Limit);
         return <Col lg={6} md={8} sx={24} key={index}>
         
         <Card
@@ -90,7 +109,7 @@ function LandingPage() {
                { /* Filter */ }
 
                { /* Checkbox */ }
-                <CheckBox  list = {contients} handleFilters={fileter=> handleFilters(filters, "continents")}/>
+                <CheckBox  list = {continents} handleFilters={filters=> handleFilters(filters, "continents")}/>
                { /* RadioBox */ }
 
                { /* Search */ }
