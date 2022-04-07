@@ -45,7 +45,7 @@ router.post('/products', (req, res, next) => {
   // product collection에 들어있는 모든 상품을 가져오기
   let limit = req.body.limit ? parseInt(req.body.limit) : 100;
   let skip = req.body.skip ? parseInt(req.body.skip) : 0;
-
+  let term = req.body.searchTerm ? req.body.searchTerm : '';
   let findArgs = {};
   console.log(req.body);
 
@@ -68,18 +68,34 @@ router.post('/products', (req, res, next) => {
 
   console.log('findArgs', findArgs);
 
-  Product.find(findArgs)
-    .populate('writer')
-    .skip(skip)
-    .limit(limit)
-    .exec((err, productInfo) => {
-      if (err) return res.status(400).json({ success: false, err });
-      return res.status(200).json({
-        success: true,
-        productInfo,
-        postSize: productInfo.length,
+  if (term) {
+    Product.find(findArgs)
+      .find({ $text: { $search: term } })
+      .populate('writer')
+      .skip(skip)
+      .limit(limit)
+      .exec((err, productInfo) => {
+        if (err) return res.status(400).json({ success: false, err });
+        return res.status(200).json({
+          success: true,
+          productInfo,
+          postSize: productInfo.length,
+        });
       });
-    });
+  } else {
+    Product.find(findArgs)
+      .populate('writer')
+      .skip(skip)
+      .limit(limit)
+      .exec((err, productInfo) => {
+        if (err) return res.status(400).json({ success: false, err });
+        return res.status(200).json({
+          success: true,
+          productInfo,
+          postSize: productInfo.length,
+        });
+      });
+  }
 });
 
 module.exports = router;
