@@ -8,7 +8,8 @@ function UserCardBlock(props) {
       return `http://localhost:5000/${image}`;
     }
   };
-  const rednaerItems = () =>
+
+  const rederItems = () =>
     props.products &&
     props.products.map((product) => (
       <tr>
@@ -38,7 +39,7 @@ function UserCardBlock(props) {
             <th>Remove from Cart</th>
           </tr>
         </thead>
-        <tbody>{rednaerItems()}</tbody>
+        <tbody>{rederItems()}</tbody>
       </table>
     </div>
   );
