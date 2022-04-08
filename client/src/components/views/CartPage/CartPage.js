@@ -9,16 +9,16 @@ function CartPage(props) {
     let cartItems = [];
 
     //리덕스 User state안에 cart안에 상품이 들어이쓴ㄴ지 확인
-    if (props.user.userData && props.user.userData) {
-      if (props.user.userdata.cart.length > 0) {
-        props.user.userData.cart.foreach((item) => {
+    if (props.user.userData && props.user.userData.cart) {
+      if (props.user.userData.cart.length > 0) {
+        props.user.userData.cart.forEach((item) => {
           cartItems.push(item.id);
         });
 
-        dispatch(getCartItems(cartItems, props.user.userdat.cart));
+        dispatch(getCartItems(cartItems, props.user.userData.cart));
       }
     }
-  }, []);
+  }, [props.user.userData]);
   return <div>CartPage</div>;
 }
 
