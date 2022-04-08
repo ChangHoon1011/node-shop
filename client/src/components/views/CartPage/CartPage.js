@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { FaSortAmountDown } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { getCartItems, removeCartItem } from "../../../_actions/user_actions";
 import UserCardBlock from "./Sections/UserCardBlock";
+import { Empty } from "antd";
 
 function CartPage(props) {
   const dispatch = useDispatch();
 
   const [Total, setTotal] = useState(0);
+  const [ShowTotal, setShowTotal] = useState(false);
 
   useEffect(() => {
     let cartItems = [];
@@ -35,11 +38,17 @@ function CartPage(props) {
     });
 
     setTotal(total);
+    setShowTotal(true);
   };
 
   let removeFromCart = (productId) => {
     console.log("removeFromCart productId:", productId);
-    dispatch(removeCartItem(productId)).then((response) => {});
+    dispatch(removeCartItem(productId)).then((response) => {
+      console.log(response);
+      if (response.payload.productInfo.length <= 0) {
+        setShowTotal(false);
+      }
+    });
   };
   return (
     <div style={{ width: "85%", margin: "3rem auto" }}>
@@ -50,9 +59,13 @@ function CartPage(props) {
           removeItem={removeFromCart}
         />
       </div>
-      <div style={{ marginTop: "3rem" }}>
-        <h2>Total Amount: ${Total}</h2>
-      </div>
+      {ShowTotal ? (
+        <div style={{ marginTop: "3rem" }}>
+          <h2>Total Amount: ${Total}</h2>
+        </div>
+      ) : (
+        <Empty description={false} />
+      )}
     </div>
   );
 }

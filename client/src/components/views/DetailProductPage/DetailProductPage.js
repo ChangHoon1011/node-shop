@@ -22,7 +22,7 @@ function DetailProductPage(props) {
         // } else {
         //   alert("상세 정보를 가져오기를 실패했습니다.");
         // }
-      })50005
+      })
       .catch((err) => alert(err));
   }, []);
   return (
