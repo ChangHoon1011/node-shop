@@ -14,7 +14,7 @@ function DetailProductPage(props) {
       .get(`/api/product/products_by_id?id=${productId}&type=single`)
       .then((response) => {
         setProduct(response.data[0]);
-
+        console.log(response.data);
         // if (response.data.success) {
         //   console.log("response:data", response.data);
         //   setProduct(response.data.product[0]);
