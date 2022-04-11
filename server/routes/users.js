@@ -144,4 +144,24 @@ router.get('/removeFromCart', auth, (req, res) => {
     }
   );
 });
+
+router.post('/successBuy', auth, (req, res) => {
+  // 1. User Collection 안에 History 필드 안에 간단한 결제 정보 넣어주기
+  let history = [];
+  let transactionData = [];
+
+  req.body.cartDetail.forEach((item) => {
+    history.push({
+      dateOfPurchase: Date.now(),
+      name: item.title,
+      price: item.price,
+      quantity: item.quantity,
+      paymentId: req.body.paymentData.paymentID,
+    });
+  });
+  // 2. Payment Collection 안에 자세한 결제 정보를 넣어주기
+
+  // 3. Product Collecion 안에 있는 sold 필드 정보 업데이트 시켜주기
+});
+
 module.exports = router;
