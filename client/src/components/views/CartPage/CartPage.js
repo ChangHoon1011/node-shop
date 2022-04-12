@@ -15,6 +15,7 @@ function CartPage(props) {
 
   const [Total, setTotal] = useState(0);
   const [ShowTotal, setShowTotal] = useState(false);
+  const [ShowSccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
     let cartItems = [];
@@ -77,14 +78,17 @@ function CartPage(props) {
         />
       </div>
 
-      <Result status="success" title="Successfully Purchased Items" />
-
       {ShowTotal ? (
         <div style={{ marginTop: "3rem" }}>
           <h2>Total Amount: ${Total}</h2>
         </div>
+      ) : ShowSuccess ? (
+        <Result status="success" title="Successfully Purchased Items" />
       ) : (
-        <Empty description={false} />
+        <>
+          <br />
+          <Empty description={false} />
+        </>
       )}
       {ShowTotal && <Paypal total={Total} onSuccess={transactionSuccess} />}
     </div>
