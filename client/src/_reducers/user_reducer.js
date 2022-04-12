@@ -6,6 +6,7 @@ import {
   ADD_TO_CART,
   GET_CART_ITEMS,
   REMOVE_CART_ITEMS,
+  ON_SUCCESS_BUY,
 } from "../_actions/types";
 
 export default function (state = {}, action) {

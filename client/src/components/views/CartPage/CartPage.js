@@ -7,7 +7,7 @@ import {
   onSuccessBuy,
 } from "../../../_actions/user_actions";
 import UserCardBlock from "./Sections/UserCardBlock";
-import { Empty } from "antd";
+import { Empty, result } from "antd";
 import Paypal from "../../utils/Paypal";
 
 function CartPage(props) {
@@ -76,6 +76,9 @@ function CartPage(props) {
           removeItem={removeFromCart}
         />
       </div>
+
+      <Result status="success" title="Successfully Purchased Items" />
+
       {ShowTotal ? (
         <div style={{ marginTop: "3rem" }}>
           <h2>Total Amount: ${Total}</h2>
