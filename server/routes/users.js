@@ -192,7 +192,7 @@ router.post('/successBuy', auth, (req, res) => {
         });
 
         async.eachSeries(
-          products,33
+          products,
           (item, callback) => {
             Product.update(
               { _id: item.id },

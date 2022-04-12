@@ -7,7 +7,7 @@ import {
   onSuccessBuy,
 } from "../../../_actions/user_actions";
 import UserCardBlock from "./Sections/UserCardBlock";
-import { Empty, result } from "antd";
+import { Empty, Result } from "antd";
 import Paypal from "../../utils/Paypal";
 
 function CartPage(props) {
@@ -15,7 +15,7 @@ function CartPage(props) {
 
   const [Total, setTotal] = useState(0);
   const [ShowTotal, setShowTotal] = useState(false);
-  const [ShowSccess, setShowSuccess] = useState(false);
+  const [ShowSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
     let cartItems = [];
